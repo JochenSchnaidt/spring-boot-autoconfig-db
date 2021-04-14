@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.prodyna.sb.library</groupId>
-        <artifactId>database-lib</artifactId>
+        <artifactId>database-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
