@@ -1,9 +1,10 @@
-package com.prodyna.sb.library.postgres.persistence.model;
+package com.prodyna.sb.library.mysql.persistence.model;
 
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -12,7 +13,7 @@ import java.io.Serializable;
 public class Personal implements Serializable {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private Integer age;

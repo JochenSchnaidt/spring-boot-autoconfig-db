@@ -56,7 +56,7 @@ public class PostgresAutoconfiguration {
      em.setJpaVendorAdapter(hibernateJpaVendorAdapter);
 
     Properties properties = new Properties();
-    properties.put("hibernate.hbm2ddl.auto", "create");
+    properties.put("hibernate.hbm2ddl.auto", "update");
     properties.setProperty("open-in-view", "false");
     properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
     properties.setProperty("show-sql", "true");
