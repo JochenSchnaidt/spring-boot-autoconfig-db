@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.prodyna.sb.library.mysql.config.MysqlAutoconfiguration

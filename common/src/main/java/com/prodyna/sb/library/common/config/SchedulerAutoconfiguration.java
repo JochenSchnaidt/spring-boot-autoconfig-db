@@ -1,4 +1,4 @@
-package com.prodyna.sb.library.config;
+package com.prodyna.sb.library.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-@ComponentScan(basePackages={"com.prodyna.sb.library"})
+@ComponentScan(basePackages={"com.prodyna.sb.library.common.trigger", "com.prodyna.sb.library.common.service"})
 public class SchedulerAutoconfiguration {
 
   @Bean

@@ -1,4 +1,4 @@
-package com.prodyna.sb.library.config;
+package com.prodyna.sb.library.mysql.config;
 
 
 import com.zaxxer.hikari.HikariConfig;
@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -23,14 +21,12 @@ import java.util.Properties;
 @Configuration
 @EnableConfigurationProperties({MysqlProperties.class})
 @EnableTransactionManagement()
-@ComponentScan(basePackages={"com.prodyna.sb.library"})
 @EnableJpaRepositories(basePackages = "com.prodyna.sb.library.mysql.persistence.repository",
     entityManagerFactoryRef="mysqlEntityManagerFactory",  transactionManagerRef = "mysqlTransactionManager")
 public class MysqlAutoconfiguration {
 
   @Autowired
   private MysqlProperties mysqlProperties;
-
 
   @Bean
   public DataSource mysqlDataSource() {

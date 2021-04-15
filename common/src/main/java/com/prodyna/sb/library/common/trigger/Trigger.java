@@ -1,4 +1,4 @@
-package com.prodyna.sb.library.trigger;
+package com.prodyna.sb.library.common.trigger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;

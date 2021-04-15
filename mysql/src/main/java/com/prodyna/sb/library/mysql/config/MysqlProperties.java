@@ -1,4 +1,4 @@
-package com.prodyna.sb.library.config;
+package com.prodyna.sb.library.mysql.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
