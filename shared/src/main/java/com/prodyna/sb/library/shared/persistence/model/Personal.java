@@ -1,4 +1,4 @@
-package com.prodyna.sb.library.postgres.persistence.model;
+package com.prodyna.sb.library.shared.persistence.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

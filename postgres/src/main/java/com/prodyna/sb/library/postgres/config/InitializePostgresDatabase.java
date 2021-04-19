@@ -1,7 +1,8 @@
 package com.prodyna.sb.library.postgres.config;
 
-import com.prodyna.sb.library.postgres.persistence.model.Personal;
+
 import com.prodyna.sb.library.postgres.persistence.repository.PersonalRepository;
+import com.prodyna.sb.library.shared.persistence.model.Personal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,8 @@ public class InitializePostgresDatabase {
     Personal p8 = new Personal(35, "Software Developer", "AT", "B. Sc.");
     Personal p9 = new Personal(35, "Software Developer", "AT", "B. Sc.");
 
-    List<Personal> saved = personalRepository.saveAll(List.of(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9));
+    List<Personal> list = List.of(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+    List<Personal> saved = personalRepository.saveAll(list);
 
     log.info("initialized postgres database with {} entities.", saved.size());
   }

@@ -10,7 +10,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>common</artifactId>
+    <artifactId>additional-db-repo</artifactId>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
@@ -18,27 +18,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.prodyna.sb.library</groupId>
-            <artifactId>postgres</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.prodyna.sb.library</groupId>
-            <artifactId>mysql</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.prodyna.sb.library</groupId>
-            <artifactId>additional-db-repo</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-
         <dependency>
             <groupId>com.prodyna.sb.library</groupId>
             <artifactId>shared</artifactId>

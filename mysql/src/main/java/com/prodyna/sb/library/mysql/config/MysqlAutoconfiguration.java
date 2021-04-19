@@ -21,8 +21,10 @@ import java.util.Properties;
 @Configuration
 @EnableConfigurationProperties({MysqlProperties.class})
 @EnableTransactionManagement()
-@EnableJpaRepositories(basePackages = "com.prodyna.sb.library.mysql.persistence.repository",
-    entityManagerFactoryRef="mysqlEntityManagerFactory",  transactionManagerRef = "mysqlTransactionManager")
+@EnableJpaRepositories(
+    basePackages = "com.prodyna.sb.library.mysql.persistence.repository",
+    entityManagerFactoryRef = "mysqlEntityManagerFactory",
+    transactionManagerRef = "mysqlTransactionManager")
 public class MysqlAutoconfiguration {
 
   @Autowired
@@ -45,10 +47,10 @@ public class MysqlAutoconfiguration {
   }
 
   @Bean
-  public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory( @Qualifier("mysqlDataSource") DataSource mysqlDataSource) {
+  public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(@Qualifier("mysqlDataSource") DataSource mysqlDataSource) {
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
     em.setDataSource(mysqlDataSource);
-    em.setPackagesToScan("com.prodyna.sb.library.mysql.persistence.model");
+    em.setPackagesToScan("com.prodyna.sb.library.shared.persistence.model");
 
     HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
     em.setJpaVendorAdapter(hibernateJpaVendorAdapter);
@@ -63,9 +65,9 @@ public class MysqlAutoconfiguration {
   }
 
   @Bean
-  JpaTransactionManager mysqlTransactionManager( @Qualifier("mysqlEntityManagerFactory") EntityManagerFactory mysqlTransactionManager) {
+  JpaTransactionManager mysqlTransactionManager(@Qualifier("mysqlEntityManagerFactory") EntityManagerFactory mysqlEntityManagerFactory) {
     JpaTransactionManager transactionManager = new JpaTransactionManager();
-    transactionManager.setEntityManagerFactory(mysqlTransactionManager);
+    transactionManager.setEntityManagerFactory(mysqlEntityManagerFactory);
     return transactionManager;
   }
 

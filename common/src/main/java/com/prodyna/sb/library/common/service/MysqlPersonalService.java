@@ -1,7 +1,8 @@
 package com.prodyna.sb.library.common.service;
 
-import com.prodyna.sb.library.mysql.persistence.model.Personal;
+
 import com.prodyna.sb.library.mysql.persistence.repository.PersonalRepository;
+import com.prodyna.sb.library.shared.persistence.model.Personal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
