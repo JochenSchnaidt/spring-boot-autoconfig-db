@@ -21,4 +21,8 @@ public class MysqlPersonalService implements PersonalService<Personal> {
     public Personal save(Personal personal) {
         return personalRepository.save(personal);
     }
+
+    public long findAll() {
+        return personalRepository.findAll().size();
+    }
 }

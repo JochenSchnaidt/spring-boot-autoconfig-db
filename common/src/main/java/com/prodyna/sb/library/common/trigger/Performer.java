@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -27,12 +28,31 @@ public class Performer implements Runnable {
 
   private static long counter = 1;
 
-  @Override
-  public void run() {
-    log.info("- - - Read from Postgres and write into MySQL - - -");
-    Personal postgresPersonal = postgresPersonalService.find(counter++);
-    log.info("Found in Postgres: {}", postgresPersonal);
 
+  @Transactional
+  public void save() {
+    log.info("- - - Read from Postgres and write into MySQL - - -");
+    Personal foundPostgresPersonal = postgresPersonalService.find(counter++);
+    log.info("Found in Postgres: {}", foundPostgresPersonal);
+
+//    saveToMySql(foundPostgresPersonal);
+    saveToPostgres(foundPostgresPersonal);
+    throw new RuntimeException(("ups"));
+  }
+
+  // will get rolled back with Exception thrown
+  private void saveToPostgres(Personal postgresPersonal) {
+    Personal personal = new Personal();
+    personal.setAge(999);
+    personal.setCountry(postgresPersonal.getCountry() + ", but not gonna happen");
+    personal.setEducation(postgresPersonal.getEducation() + ",  but not gonna happen");
+    personal.setProfession(postgresPersonal.getProfession() + ", but not gonna happen");
+    Personal savedPostgresPersonal = postgresPersonalService.save(personal);
+    log.info("Saved to Postgres: {}", savedPostgresPersonal);
+  }
+
+  // will work even with Exception thrown
+  private void saveToMySql(Personal postgresPersonal) {
     Personal mysqlPersonal = new Personal();
     mysqlPersonal.setAge(postgresPersonal.getAge());
     mysqlPersonal.setCountry(postgresPersonal.getCountry());
@@ -40,18 +60,19 @@ public class Performer implements Runnable {
     mysqlPersonal.setProfession(postgresPersonal.getProfession());
     Personal savedMysqlPersonal = mysqlPersonalService.save(mysqlPersonal);
     log.info("Saved to MySQL: {}", savedMysqlPersonal);
+  }
 
-    if (counter == 5) {
-      Survey survey = new Survey();
-      survey.setAccountOwner(true);
-      survey.setCommunityMember(false);
-      survey.setParticipationFrequency("often");
-      survey.setVisitationFrequency("even more often");
-      survey.setEase("easy");
-      survey.setLength("awful long");
-      Survey savedSurvey = surveyRepository.save(survey);
-      log.info("Saved to Postgres: {}", savedSurvey);
+  @Override
+  public void run() {
+    try {
+      log.info("Before tx save: {}", mysqlPersonalService.findAll());
+      save();
+    } catch( Exception e) {
+      log.error("Ups", e);
     }
+
+    log.info("After tx save: {}", mysqlPersonalService.findAll());
+
 
     if (counter >= 10) {
       counter = 1;
